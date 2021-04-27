@@ -1,0 +1,92 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(App());
+
+class App extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Penyimpanan Data Barang',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Input Data Barang'),
+        ),
+        body: Barang(),
+      ),
+    );
+  }
+}
+
+class DataBarang {
+  String nobarang;
+  String namabarang;
+  String kategori;
+  String harga;
+
+  DataBarang({this.nobarang, this.namabarang, this.kategori, this.harga});
+}
+
+// class Mahasiswa
+class Barang extends StatefulWidget {
+  _MyappState createState() => _MyappState();
+}
+
+class _MyappState extends State<Barang> {
+  //deklarasi variabel
+  final txtnobarang = TextEditingController();
+  final txtnamabarang = TextEditingController();
+  final txtkategori = TextEditingController();
+  final txtharga = TextEditingController();
+
+  List<Widget> data = [];
+
+  onTambah() {
+    setState(() {
+      data.add(ListTile(
+        leading: Text(txtnobarang.text),
+        title: Text(txtnamabarang.text),
+        subtitle: Text(txtharga.text),
+        trailing: Text(txtkategori.text),
+      ));
+      txtnobarang.clear();
+      txtnamabarang.clear();
+      txtkategori.clear();
+      txtharga.clear();
+    });
+  }
+
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        new Container(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              TextField(
+                controller: txtnobarang,
+                decoration: InputDecoration(hintText: 'No Barang'),
+              ),
+              TextField(
+                controller: txtnamabarang,
+                decoration: InputDecoration(hintText: 'Nama Barang'),
+              ),
+              TextField(
+                controller: txtkategori,
+                decoration: InputDecoration(hintText: 'Kategori'),
+              ),
+              TextField(
+                controller: txtharga,
+                decoration: InputDecoration(hintText: 'Harga Satuan'),
+              ),
+              Divider(height: 5.0),
+              ElevatedButton(child: Text("Tambah"), onPressed: onTambah),
+            ],
+          ),
+        ),
+        new Column(
+          children: data,
+        )
+      ],
+    );
+  }
+}
