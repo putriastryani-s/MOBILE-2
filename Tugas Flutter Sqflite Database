@@ -25,7 +25,7 @@ class DataBarang {
   DataBarang({this.nobarang, this.namabarang, this.kategori, this.harga});
 }
 
-// class Mahasiswa
+// class Barang
 class Barang extends StatefulWidget {
   _MyappState createState() => _MyappState();
 }
